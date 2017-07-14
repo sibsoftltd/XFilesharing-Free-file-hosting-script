@@ -1,0 +1,55 @@
+P {font-family: times;}
+
+body{margin: 0px;height:auto;overflow:auto;font:13px Arial;color:#444;}
+a, a:visited {color: #119;}
+h3 {font: bold 19px Arial;}
+a.Navigation{color: #EE0000; font: 14px Arial; margin: 2px; text-decoration: none;}
+a.SelNavigation {color: #000000; background-color: #BBD9EE; padding: 2px; font: 14px Arial; text-decoration: none; margin: 2px;}
+
+.result_slot {background: #F3F6F9; width:640px; border:1px solid #cccac2;text-align:left;color:#111;padding:3px;}
+.result_slot td {font:13px Arial;}
+.result_slot input {width:500px;border:1px solid #AAA;color:#444;}
+.file_slot {width: 300px;background:#CAFFCA;border:1px solid #9FC99F;text-align:left;padding:5px;font: 13px Arial;}
+.captcha_code {border: 1px solid #777;font: 19px Arial;width:50px;text-align:center;}
+ 
+#div1, #file_list {text-align: left; color: #484B50; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px;}
+#div1 {width: 500px; padding: 10px; left:-9999px;}
+.myForm {font: 12px Arial; border: 1px solid #636363;}
+#upload_input input {font: 12px Arial; border: 1px solid #636363; margin-top: 1px; width: 100%;}
+#file_list {width: 100%; border: 1px solid #434343; background-color: #ffffff;}
+#file_list input {font: 12px Arial; border: 1px solid #c3c3c3; margin-top: 1px;}
+.myForm {font: 12px Arial; border: 1px solid #636363; margin-top: 1px;}
+.fdescr {width: 300px;}
+.xfname  {color: #333;}
+.xdescr  {color: #aaa;vertical-align:top;}
+#optidiv {position:absolute;left:-9999px;margin-top:2px;padding:3px;border: 1px dotted #d0d0d0;background:#e9e9e9;}
+.ok {font:bold 13px Arial;color:#1b1;}
+.err {font:bold 13px Arial;color: #911;}
+
+/* CSS below required for Inline3 mode */
+.data {border-collapse:collapse; background-color: #e9e9e9; width: 400px; margin-bottom: 3px;}
+.data TR TD {border: 1px solid #a3a3a3; font: 12px Arial;}
+.bar1 {border: 1px solid #a3a3a3; background-color: #f6f6f6; text-align: left; vertical-align: middle; height: 20px; width: 98%;}
+.bar2 {width: 1%; background-color: #c9c9c9; height: 20px; text-align: left;}
+.message {width: 400px; border: 1px solid #909090; font: 11px Arial; margin-top: 5px; text-align: left; padding-left: 3px; background-color: #f9f9f9;}
+.myLink  {font: bold 13px Arial; color: #303030; text-decoration: none;}
+.btn     {font: 15px Verdana; margin-top: 3px; margin-bottom: 5px; width:200px;}
+
+.rdc_box {background: url(images/rdc_tl.png) no-repeat top left;}
+.rdc_top {background: url(images/rdc_tr.png) no-repeat top right;}
+.rdc_bottom {background: url(images/rdc_bl.png) no-repeat bottom left;}
+.rdc_bottom div {background: url(images/rdc_br.png) no-repeat bottom right;}
+.rdc_content {background: url(images/rdc_r.png) top right repeat-y;}
+.rdc_top div,.rdc_top,
+.rdc_bottom div, .rdc_bottom {
+	width: 100%;
+	height: 15px;
+	font-size: 1px;
+}
+.rdc_content, .rdc_bottom {margin-top: -19px;}
+.rdc_content { padding: 0 15px; }
+
+.tbl1  {background-color: #9BB9CE;text-align:left;}
+.tbl1 tr td {background-color: #FFFFFF; font: 12px Arial, Helvetica, sans-serif;}
+.tbl1 tr:hover td {background-color: #FFFFe0; font: 12px Arial, Helvetica, sans-serif;}
+.tbl1 tr.hdr td, .tbl1 th, .hdr {background-color: #BBD9EE; font: bold 15px Arial;text-align:center;}

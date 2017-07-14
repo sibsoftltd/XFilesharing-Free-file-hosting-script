@@ -1,0 +1,27 @@
+<HTML>
+<HEAD>
+<Style>
+BODY {background-color: #FFFFFF; font: 13px Arial;}
+.DTable  {margin-top: 4px; border: 1px solid #e0e0e0; background-color: #e0e0e0;}
+.DTable TR TD {font: 13px Arial, Helvetica, sans-serif; background-color: #FFFFFF;}
+.DTable TR.style1 TD {background-color: #F6F6F6;}
+.DTable TR.style2 TD {background-color: #F0FFF0;}
+</Style>
+</HEAD>
+<BODY>
+<b>Somebody sent you these files using <a href="<TMPL_VAR site_url>"><TMPL_VAR site_name></a>:</b><br><br>
+
+<TMPL_LOOP files>
+<Table border=0 cellspacing=1 cellpadding=2 class="DTable">
+<TR><TD><b>Filename:</b></TD><TD><TMPL_VAR fname></TD></TR>
+<TR><TD><b>Filesize:</b></TD><TD><TMPL_VAR fsize></TD></TR>
+<TMPL_IF descr><TR><TD><b>Description:</b></TD><TD><TMPL_VAR descr></TD></TR></TMPL_IF>
+<TR><TD><b>Download Link:</b></TD><TD><a href="<TMPL_VAR site_url>/<TMPL_VAR id>/<TMPL_VAR fname>"><TMPL_VAR site_url>/<TMPL_VAR id>/<TMPL_VAR fname></a></TD></TR>
+</Table>
+<br>
+</TMPL_LOOP>
+
+<br>
+
+</BODY>
+</HTML>

@@ -1,0 +1,17 @@
+<center>
+<br>
+<TMPL_IF left><a class="Navigation" href="?&page=<TMPL_VAR page_left>&<TMPL_VAR params>" >&lt;</a></TMPL_IF>
+<TMPL_LOOP name="page_list">
+<TMPL_UNLESS is_cp>
+	<a class="Navigation" href="?&page=<TMPL_VAR page>&<TMPL_VAR params>" ><TMPL_VAR page></a>
+<TMPL_ELSE>
+	<a class="SelNavigation"><TMPL_VAR page></a>
+</TMPL_UNLESS>
+</TMPL_LOOP>
+<TMPL_IF right><a class="Navigation" href="?&page=<TMPL_VAR page_right>&<TMPL_VAR params>" >&gt;</a></TMPL_IF>
+<TMPL_IF all>&nbsp; <a class="Navigation" href="?&page=all_pages&<TMPL_VAR params>">All</a></TMPL_IF>
+<br>
+<font class="ver11">(<TMPL_VAR total> items total)</font>
+<br> 
+</center>    
+       

@@ -1,0 +1,17 @@
+LimitRequestBody 10000000000000
+
+<IfModule mod_security.c>
+	SecFilterEngine Off
+	SecFilterScanPOST Off
+	SetEnvIfNoCase Content-Type "^multipart/form-data;" "MODSEC_NOPOSTBUFFERING=Do not buffer file uploads"
+</IfModule>
+
+<IfModule mod_gzip.c>
+	mod_gzip_on No
+</IfModule>
+
+<IfModule mod_deflate.c>
+	SetEnvIfNoCase Request_URI testenv.cgi no-gzip dont-vary
+	SetEnvIfNoCase Request_URI upload_status.cgi no-gzip dont-vary
+	SetEnvIfNoCase Request_URI upload.cgi no-gzip dont-vary
+</IfModule>

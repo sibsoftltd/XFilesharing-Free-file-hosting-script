@@ -1,0 +1,25 @@
+<HTML>
+<HEAD>
+<Style>
+BODY {background-color: #FFFFFF; font: 13px Arial;}
+.DTable  {margin-top: 4px; border: 1px solid #e0e0e0; background-color: #e0e0e0;}
+.DTable TR TD {font: 13px Arial, Helvetica, sans-serif; background-color: #FFFFFF;}
+.DTable TR.style1 TD {background-color: #F6F6F6;}
+.DTable TR.style2 TD {background-color: #F0FFF0;}
+</Style>
+</HEAD>
+<BODY>
+<b>New file(s) uploaded using XUpload script.</b><br>
+<Table border=0 cellspacing=1 cellpadding=2 class="DTable">
+<TR><TD><b>Upload finished at:</b></TD><TD><TMPL_VAR time></TD></TR>
+<TR><TD><b>Total upload size:</b></TD><TD><TMPL_VAR total_size_mb> (<TMPL_VAR total_size>)</TD></TR>
+</Table>
+<br>
+<Table border=0 cellspacing=1 cellpadding=2 class="DTable">
+<TR><TD colspan=2><b>Upload Parameters</b></TD></TR>
+<TMPL_LOOP params>
+<TR<TMPL_IF style> class="style<TMPL_VAR style>"</TMPL_IF>><TD width="1%" nowrap><TMPL_VAR name>:</TD><TD><TMPL_IF value2><TMPL_VAR value2><TMPL_ELSE><TMPL_VAR value></TMPL_IF></TD></TR>
+</TMPL_LOOP>
+</Table>
+</BODY>
+</HTML>

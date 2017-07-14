@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+<head>
+<title>File Upload Progress</title>
+<Script language="JavaScript">
+var doc = document;
+var totalsize=<TMPL_VAR data_total_dgt>;
+var dat = new Array(<TMPL_VAR nbars>);
+for(i=0;i<dat.length;i++)dat[i]=0;
+function changeValue(id,value)
+{
+  if(!id)return;
+  if(doc.getElementById(id))
+  {
+      doc.getElementById(id).innerHTML = value;
+  }
+}
+function SP(cursize,time,speed,files,left)
+{
+    var percent = parseInt(100*parseFloat(cursize)/parseFloat(totalsize));
+    if(doc.getElementById('upload_status'))doc.getElementById('upload_status').style.width = percent+'%';
+    changeValue('percent', percent+'%' );
+    changeValue('current',cursize);
+	changeValue('speed',speed);
+	changeValue('files',files);
+	changeValue('time', convertSeconds(time) );
+	changeValue('left', convertSeconds(left) );
+    PB(speed);
+}
+function convertSeconds(seconds)
+{
+	hours = parseInt(seconds/3600);
+	mins  = parseInt((seconds-hours*3600)/60);
+	secs  = seconds - hours*3600 - mins*60;
+	if(hours<10){ hours = '0'+hours; }
+	if(mins<10){ mins  = '0'+mins; }
+	if(secs<10){ secs  = '0'+secs; }
+	return hours+':'+mins+':'+secs;
+}
+function Message(msg)
+{
+    if(!doc.getElementById('message'))return;
+    doc.getElementById('message').innerHTML += msg+'<br>';
+	window.scrollBy(0,550);
+    doc.getElementById('message').scrollTop+=50;
+}
+function ClosePopUp()
+{
+    if(doc.getElementById('close_finished') && document.getElementById('close_finished').checked==true)self.close();
+}
+function StopUpload(no_close)
+{
+    var op;
+    var agt=navigator.userAgent.toLowerCase();
+    var is_opera = (agt.indexOf("opera") != -1);
+    if(window.parent.frames['xupload']){op=window.parent;} else {op=window.opener;}
+    if (navigator.appVersion.indexOf("Safari")>0)
+    {
+        op.location.reload( true );
+    }
+    else if (!document.all || is_opera)
+    {
+        window.stop();
+        op.frames['xupload'].stop();
+    }
+    else
+    {
+        window.document.execCommand('Stop');
+        op.frames['xupload'].document.execCommand('Stop');
+    }
+    if(no_close)return;
+    popupClose();
+}
+function popupClose()
+{
+   var op = window.parent.document;
+   if( op.getElementById('progress2') )op.getElementById('progress2').style.left='-9999px';
+   if( op.getElementById('div1') )op.getElementById('div1').style.visibility='visible';
+   
+   document.getElementsByTagName("BODY")[0].style.display='none';
+   document.write('<Center>Restarting Upload...</Center>');
+   document.close();
+}
+function PB(val)
+{
+   if(!doc.getElementById('curr_speed'))return;
+   for(i=0;i<dat.length;i++)
+   {
+     dat[i] = dat[i+1];
+   }
+   dat[dat.length-1] = val;
+   if(doc.getElementById('curr_speed'))doc.getElementById('curr_speed').innerHTML = val;
+   setBarValues();
+}
+function setBarValues()
+{
+  var bar_height = doc.getElementById('bar_table').style.height;
+  bar_height = bar_height.replace(/px/,'');
+  max_value=1;
+  for(i=0;i<dat.length;i++){if(parseInt(dat[i])>max_value)max_value=dat[i];}
+  for(i=1;i<=dat.length;i++)
+  {
+     if(dat[i-1]=='' || !dat[i-1])dat[i-1]=0;
+     newh = bar_height*(1 - dat[i-1]/max_value);
+     if(newh<0)alert(i+':'+dat[i-1]+':'+max_value);
+     doc.getElementById("b"+i).style.height = newh+'px';
+  }
+}
+function updateFileStatus(id,classname,text,size)
+{
+    if(doc.getElementById('fs'+id))
+    {
+        doc.getElementById('fs'+id).className=classname;
+        doc.getElementById('fs'+id).innerHTML=text;
+        doc.getElementById('fss'+id).innerHTML=size;
+    }
+}
+function jahDone(url)
+{
+    if (req.readyState == 4)
+    {
+        if (req.status == 200)
+        {
+            results = req.responseText;
+            eval(results);
+        }
+    }
+}
+function callInProgress (xmlhttp) {
+switch (xmlhttp.readyState) {
+case 1: case 2: case 3:
+return true;
+break;
+// Case 4 and 0
+default:
+return false;
+break;
+}
+}
+
+var timeoutId;
+function jah(url)
+{
+    url = url+'&rnd='+Math.random();
+    if (window.XMLHttpRequest)
+    {
+        req = new XMLHttpRequest();
+        req.onreadystatechange = function() {if(window.jahDone)jahDone(url);};
+        req.open("GET", url, true);
+        req.send(null);
+    }
+    else if (window.ActiveXObject)
+    {
+        req = new ActiveXObject("Microsoft.XMLHTTP");
+        if (req)
+        {
+            req.onreadystatechange = function() {if(window.jahDone)jahDone(url);};
+            req.open("GET", url, true);
+            req.send();
+            
+        }
+    }
+    timeoutId = window.setTimeout(
+    function()
+    {
+        if ( callInProgress(req) )
+        {
+            req.abort();
+            window.clearTimeout(timeoutId);
+            jah(url);
+        }
+    },
+    12000
+    );
+}
+</Script>
+<Style>
+body  {background-color: #f3f3f3; font: 13px Arial; padding: 2px;}
+.data {background-color: #a3a3a3; width: 90%; margin-bottom: 3px;}
+.data TR TD {background-color: #e9e9e9; font: 12px Arial;}
+.bar1 {border: 1px solid #a3a3a3; background-color: #f6f6f6; text-align: left; vertical-align: middle; height: 20px; width: 90%; margin-bottom: 8px;}
+.bar2 {width: 1%; background-color: #c9c9c9; height: 20px; text-align: left;}
+#message {width: 90%; height: 65px; font: 11px Arial; margin-top: 4px; text-align: left; padding-left: 2px; xbackground-color: #f9f9f9; xborder: 1px solid #909090; overflow: auto;}
+.myLink  {font: bold 13px Arial; color: #303030; text-decoration: none;}
+.btn     {font: 12px Arial; border: 1px solid #a3a3a3; background-color: #e9e9e9; margin-top: 3px; margin-bottom: 5px;}
+.bar_table {width: 60px;}
+.bar_table TR TD {background-color: #707070;}
+.sbar {background-color: #e9e9e9; height: 60px;}
+.file_list {background-color: #a3a3a3; font: 11px Arial; width: 90%;}
+.file_list TR TD {background-color: #FFFFFF;} 
+.file_list TR TD.done {background-color: #C0FFC0;} 
+.file_list TR TD.load {background-color: #C0C0FF;} 
+</Style>
+</head>
+
+
+<BODY topmargin=5 leftmargin=0 MARGINHEIGHT=0 MARGINWIDTH=0>
+<Center>
+<TMPL_IF message>
+<b><TMPL_VAR message></b>
+<TMPL_UNLESS nostop>
+ <br><br><a href="javascript: popupClose();" class="myLink">- Close -</a></Center>
+ <Script>document.onload=setTimeout("StopUpload(1)",500);</Script>
+</TMPL_UNLESS>
+<TMPL_ELSE>
+
+<div class="bar1" align=left><div class="bar2" id="upload_status"></div></div>
+<div style="margin-top: -27px; margin-bottom: 10px;"><b><TMPL_VAR percent_completed></b></div>
+
+<Table cellpadding=1 cellspacing=1 class="data" id="data">
+<TR>
+   <TD align=right><b>Files uploaded:</b></TD>
+   <TD align=center><TMPL_VAR files_uploaded> of <TMPL_VAR files_total></TD>
+   <TD rowspan=4 style="width: 60px;padding: 0px;" align=center valign=bottom>
+    <small><font id="curr_speed">0</font> Kbps</small><br>
+    <table cellpadding=0 cellspacing=0 border=0 class="bar_table" id="bar_table" style="height: 70px">
+    <TR align=center valign=top>
+    <TMPL_LOOP bars><TD><div class="sbar" id="b<TMPL_VAR num>"><span></span></div></TD></TMPL_LOOP>
+    </TR>
+    </table>
+   </TD>
+</TR>
+<TR>
+   <TD align=right><b>Current position:</b></TD>
+   <TD align=center><TMPL_VAR data_uploaded> / <TMPL_VAR data_total></TD>
+</TR>
+<TR>
+   <TD align=right xwidth="2%" nowrap><b>Time spent/estimate:</b></TD>
+   <TD align=center><TMPL_VAR time_spent> / <TMPL_VAR time_left></TD>
+</TR>
+<TR>
+   <TD align=right><b>Approx. speed:</b></TD>
+   <TD align=center><TMPL_VAR speed> Kbytes/Sec.</TD>
+</TR>
+</Table>
+<Table class="file_list" cellpadding=1 cellspacing=1>
+<TMPL_LOOP file_list>
+<TR><TD id="fs<TMPL_VAR num>" style="width: 50px;">Pending</TD><TD align=left><TMPL_VAR name></TD><TD><div id="fss<TMPL_VAR num>"></div></TD></TR>
+</TMPL_LOOP>
+</Table>
+
+<input type="button" value="Stop Upload" onclick="StopUpload();" class="btn" id="stop_btn">
+
+<div id="message"></div>
+
+
+</TMPL_IF>
+</BODY>
+</HTML>

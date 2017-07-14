@@ -1,0 +1,9 @@
+RewriteEngine on
+
+RewriteRule    ^$					/cgi-bin/index.cgi [L]
+RewriteRule    ^([0-9A-Z]{12})/([^\/]+)$		/cgi-bin/index.cgi?act=download1&id=$1&fname=$2 [L]
+RewriteRule    ^del\-([0-9A-Z]{12})\-([0-9A-Z]+)/.+$	/cgi-bin/index.cgi?del=$1-$2 [L]
+RewriteRule    ^admin$					/?act=admin [R]
+
+RewriteCond	%{REQUEST_FILENAME} !-f
+RewriteRule    ^([a-z0-9\-\_]+).html$			/cgi-bin/index.cgi?act=page&tmpl=$1 [L]

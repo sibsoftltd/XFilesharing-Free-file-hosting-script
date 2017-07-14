@@ -1,0 +1,27 @@
+<a href="?act=admin">File Management</a> &nbsp; <a href="?act=admin_settings">Settings</a> &nbsp; <a href="?act=admin&logout=1"> Logout </a>
+<h3>Site Settings</h3>
+<Form name="F1" method="POST">
+<input type="hidden" name="act" value="admin_settings">
+<Table class="tbl1" cellpadding=3 cellspacing=1 style="">
+<TR><TD align=right><b>Site Name</b></TD><TD><input type="text" name="site_name" value="<TMPL_VAR site_name>" size=32></TD></TR>
+<TR><TD align=right><b>Expire files after</b></TD><TD><input type="text" name="files_expire_created" value="<TMPL_VAR files_expire_created>" size=2> days after upload</TD></TR>
+<TR><TD align=right><b>Expire files after</b></TD><TD><input type="text" name="files_expire_access" value="<TMPL_VAR files_expire_access>" size=2> days after last download</TD></TR>
+<TR><TD align=right><b>Max number of downloads</b></TD><TD><input type="text" name="max_downloads_number" value="<TMPL_VAR max_downloads_number>" size=4> per file</TD></TR>
+<TR><TD align=right><b>Allow max</b></TD><TD><input type="text" name="max_upload_files" value="<TMPL_VAR max_upload_files>" size=1> files per one upload</TD></TR>
+<TR><TD align=right><b>Max total upload size</b></TD><TD><input type="input" name="max_upload_size" value="<TMPL_VAR max_upload_size>" size=7> Mbytes</TD></TR>
+<TR><TD align=right><b>Max upload size per file</b></TD><TD><input type="input" name="max_upload_filesize" value="<TMPL_VAR max_upload_filesize>" size=7> Mbytes</TD></TR>
+<TR><TD align=right><b>File Descriptions</b></TD><TD><input type="checkbox" name="enable_file_descr" value="1" id="efd"<TMPL_IF enable_file_descr> checked</TMPL_IF>><label for="efd">Enable</label></TD></TR>
+<TR><TD align=right><b>Allowed Only extensions</b></TD><TD><input type="text" name="ext_allowed" value="<TMPL_VAR ext_allowed>" size=16> delimited with "|"</TD></TR>
+<TR><TD align=right><b>Not Allowed extensions</b></TD><TD><input type="text" name="ext_not_allowed" value="<TMPL_VAR ext_not_allowed>" size=16> delimited with "|"</TD></TR>
+<TR><TD align=right><b>Allowed Only IPs</b><br>(one IP per row)</TD><TD><Textarea name="ip_allowed" cols=16 rows=4><TMPL_VAR ip_allowed></Textarea></TD></TR>
+<TR><TD align=right><b>Banned IPs</b><br>(one IP per row)<br>Use * for wildcard</TD><TD><Textarea name="ip_not_allowed" cols=16 rows=4><TMPL_VAR ip_not_allowed></Textarea></TD></TR>
+<TR><TD align=right><b>Captcha mode</b></TD><TD><input type="radio" name="use_captcha" value="0" id="c0"<TMPL_VAR captcha_0>><label for="c0">None</label> &nbsp; <input type="radio" name="use_captcha" value="1" id="c1"<TMPL_VAR captcha_1>><label for="c1">Image (GD required)</label> &nbsp; <input type="radio" name="use_captcha" value="2" id="c2"<TMPL_VAR captcha_2>><label for="c2">Text</label></TD></TR>
+<TR><TD align=right><b>Countdown Delay</b></TD><TD><input type="text" name="download_countdown" value="<TMPL_VAR download_countdown>" size=2> seconds</TD></TR>
+<TR><TD align=right><b>Send upload notifications to<br><small>empty to disable</small></b></TD><TD><input type="text" name="confirm_email" value="<TMPL_VAR confirm_email>" size=32></TD></TR>
+<TR><TD align=right><b>Send E-mail FROM:</b></TD><TD><input type="text" name="confirm_email_from" value="<TMPL_VAR confirm_email_from>" size=32></TD></TR>
+<TR><TD align=right><b>Site Contact E-mail</b></TD><TD><input type="text" name="contact_email" value="<TMPL_VAR contact_email>" size=32></TD></TR>
+<TR><TD align=right><b>Site Abuse E-mail</b></TD><TD><input type="text" name="abuse_email" value="<TMPL_VAR abuse_email>" size=32></TD></TR>
+
+<TR><TD colspan=2 align=center><input type="submit" name="save" value=" Save Settings "></TD></TR>
+</Table>
+</Form>

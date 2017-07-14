@@ -1,0 +1,53 @@
+<TMPL_IF fsize>
+<h3>File Download</h3><br>
+<Form name="F1" method="POST" action="<TMPL_VAR site_url>/" onSubmit="if($('btn_download').disabled)return false;this.btn.value='Sending...';this.btn.disabled=true;return true;">
+<input type="hidden" name="act" value="download2">
+<input type="hidden" name="id" value="<TMPL_VAR id>">
+<input type="hidden" name="fname" value="<TMPL_VAR fname>">
+<input type="hidden" name="rand" value="<TMPL_VAR rand>">
+<div class="file_slot">
+File Name: <b><TMPL_VAR fname></b><br>
+File Size: <TMPL_VAR fsize><br>
+Uploaded: <TMPL_VAR created><br>
+Downloaded <TMPL_VAR downloads> times
+<TMPL_IF descr><br><br><b>Description:</b> <TMPL_VAR descr></TMPL_IF>
+</div>
+
+<TMPL_IF sc>
+<input type="hidden" name="sc" value="<TMPL_VAR sc>">
+<br>
+<table><tr><td colspan=2><b>Please enter code:</b></td></tr>
+<tr><td><TMPL_IF iurl><img src="<TMPL_VAR iurl>"><TMPL_ELSE><TMPL_VAR itext></TMPL_IF></td><td valign=middle><input type="text" name="code" class="captcha_code"></td></tr>
+</table>
+</TMPL_IF>
+
+<TMPL_IF pass_required><br><b>Password:</b> <input type="password" name="password" class="myForm"><br></TMPL_IF>
+
+<TMPL_IF msg><font class="err"><TMPL_VAR msg></font><br></TMPL_IF>
+
+<br>
+<TMPL_IF countdown>
+<span id="countdown_str">Wait <span id="countdown"><TMPL_VAR countdown></span> seconds</span>
+</TMPL_IF>
+
+<br><input type="submit" name="btn" id="btn_download" value="Download File">
+</Form>
+<TMPL_ELSE>
+<b>File Not Found</b><br><br>
+<div style="width:500px;text-align:left;">
+The file you were looking for could not be found, sorry for any inconvenience.<br><br>
+Possible causes of this error could be: 
+<ul>
+<li>The file expired
+<li>The file was deleted by its owner
+<li>The file was deleted by <TMPL_VAR site_name> because it didn't comply with our Terms of Use
+</ul>
+</div>
+</TMPL_IF>
+
+<TMPL_IF countdown>
+<Script language="JavaScript">
+$('btn_download').disabled=true;
+setTimeout("countDown()",1000);
+</Script>
+</TMPL_IF>

@@ -1,0 +1,46 @@
+XFileSharing FREE script installation (Jan 2010)
+
+Requirements:
+* Perl higher than 5.005 version 	[http://www.perl.com/download.csp]
+* MySQL database                        [http://www.mysql.com]
+* Apache mod_rewrite module
+* .htaccess files support	 	[http://www.tutorio.com/tutorial/enable-mod-rewrite-on-apache]
+* GD lib, GD perl mudule (Optional) 	[http://www.libgd.org/Downloads] [http://search.cpan.org/~lds/GD]
+
+1) Copy all files from "cgi-bin" into your cgi-bin folder (or folder where your perl scripts running)
+   Copy all files from "public_html" into your document root folder (folder with your HTML files).
+
+2) Set install.cgi permissions to 755. Then open it in your browser (e.g. http://server.com/cgi-bin/install.cgi)
+
+3) After complete install delete install.cgi, install.sql files for security reasons.
+
+4) Modify XFileConfig.pm file with your site details.
+
+5) Change relative URLs in .htaccess file in htdocs to your own ones.
+   If you don't have .htaccess support on your sever you should copy .htaccess files source to httpd.conf and restart Apache.
+
+--------------------------------------------
+
+Admin area available on link: http://YOURSITE.com/admin
+You should specify password for it in 'admin_password' fields inside XFileConfig.pm
+
+If you want to modify script layout you can find .html files in Templates folder:
+main.html 	 - main design file, other templates been inserted into it
+upload_form.html - index page with upload form
+progress_bar.html- template for upload progress bar
+upload_results.html - page with generated links after upload
+download.html	 - download page
+message.html	 - error/status message page
+delete_file.html - page showed when you're about to delete file with Delete Link
+confirm_email.html	- upload notification email to admin
+confirm_email_user.html	- upload notification email to recipient
+
+Also you can put any .html pages in Templates/Pages folder and access them via URL: http://YOURSITE.com/XYZ.html where XYZ.html is existing file.
+Default static files: tos.html, faq.html, contact.html
+
+
+XFileSharing forum: http://www.sibsoft.net/forum/xfilesharing-f6.html
+
+Contact: info@sibsoft.net
+
+-= www.SibSoft.net =-

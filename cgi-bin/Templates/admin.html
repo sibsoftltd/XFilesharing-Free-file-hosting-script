@@ -1,0 +1,59 @@
+<TMPL_UNLESS signed>
+<Form method="POST" action="<TMPL_VAR site_cgi>/index.cgi">
+<input type="hidden" name="act" value="admin">
+<b>Password:</b> <input type="password" name="password" size=12>
+<input type="submit" name="submit" value="Enter">
+</Form>
+<TMPL_ELSE>
+<a href="?act=admin">File Management</a> &nbsp; <a href="?act=admin_settings">Settings</a> &nbsp; <a href="?act=admin&logout=1"> Logout </a>
+<h3>Admin File Management</h3>
+<Table class="tbl1" cellspacing=1 cellpadding=3>
+<TR class="hdr"><TD colspan=7>
+<form style="margin:0;">
+Files per page: 
+<input type="radio" name="per_page" value="10"<TMPL_VAR per_10>>10
+<input type="radio" name="per_page" value="25"<TMPL_VAR per_25>>25 
+<input type="radio" name="per_page" value="50"<TMPL_VAR per_50>>50 
+<input type="radio" name="per_page" value="all"<TMPL_VAR per_all>>All 
+<br>
+<input type="hidden" name="act" value="admin">
+<input type="hidden" name="num" value="<tmpl_var num>">
+Search:<input type="text" name="key" value="<TMPL_VAR key>"><input type="submit" value="Show Files">
+</form>
+</TD></TR>
+<TR class="hdr">
+<TD title="Sort by Filename"><TMPL_VAR s_file_name>Filename<TMPL_VAR s2_file_name></TD>
+<TD title="Sort by Number of Downloads"><TMPL_VAR s_file_downloads>DL<TMPL_VAR s2_file_downloads></TD>
+<TD title="Sort by File Size"><TMPL_VAR s_file_size>File Size<TMPL_VAR s2_file_size></TD>
+<TD title="Sort by Traffic Generated"><TMPL_VAR s_traffic>Traffic<TMPL_VAR s2_traffic></TD>
+<TD title="Sort by Creation Date"><TMPL_VAR s_file_created>Uploaded<TMPL_VAR s2_file_created></TD>
+<TD>IP</TD>
+<TD>&nbsp;</TD>
+</TR>
+<TMPL_LOOP files>
+<TR>
+<TD align=left><a href="<TMPL_VAR site_url>/<TMPL_VAR file_code>/<TMPL_VAR file_name>" target="_blank"><TMPL_VAR file_name></a></TD>
+<TD align=center><TMPL_VAR file_downloads></TD>
+<TD align=right><TMPL_VAR file_size2></TD>
+<TD align=right><TMPL_VAR traffic></TD>
+<TD><TMPL_VAR file_created></TD>
+<TD><TMPL_VAR file_ip></TD>
+<TD><a href="?act=admin&admdel=<TMPL_VAR file_code>" onClick="return ConfirmLink2('Delete <TMPL_VAR file_name2> file?')"><img src="<TMPL_VAR site_url>/images/del.gif" border=0></a></TD>
+</TR>
+</TMPL_LOOP>
+<TR class="hdr"><TD>Total:</TD><TD><TMPL_VAR total_downloads></TD><TD><TMPL_VAR total_size> Mb</TD><TD><TMPL_VAR total_traffic> Mb</TD><TD colspan=3></TD></TR>
+</Table>
+<TMPL_VAR paging>
+<br><br>
+
+<Script>
+function ConfirmLink2(str)
+{
+    if( !confirm(str) )
+    {
+        return false;
+    }
+ return true;
+}
+</Script>
+</TMPL_UNLESS>

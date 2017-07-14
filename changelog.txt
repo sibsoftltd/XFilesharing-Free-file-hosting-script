@@ -1,0 +1,45 @@
+1.21 (2011-02-17)
+ * Fixed multiple script vulnerabilities
+
+1.2 (2009-12-25)
+ * XFileSharing released for free! Happy Christmas!
+
+1.2 (2008-01-31)
+ + Now using mySQL database instead of slow unstable text one
+ + fixed Estimated time calculation
+ + fixed Startup errors handling
+ + improved mod_rewrite rules
+ + adding 0-downloads files to admin list
+ + Fixed some admin area errors
+ + Added Search to admin area
+ + Bi-direction sort in admin area by all fields
+ + Fixed description vulnerability
+ + Fixed possible old file overwrite
+ + Fixed max_downloads_number option save from Admin area
+ + Generating download links ending with .html
+ + Redirect to admin page from shorter '/admin' URL
+ + No need to fix action in upload_form.html anymore
+ + Some CPU usage dropdown when downloading
+ + Improved AJAX
+ + Contact form JS validation added
+ + Added IP to admin list
+ + installer
+
+1.1 (2007-09-13)
+ * Implemented Admin statistics
+ * Implemented web Admin Settings
+ * Added download countdown feature
+ * Implemented new progress sync engine
+ * Anti-Virus file validation via ClamAv (optional)
+ + Enhanced Templates structure
+ + Improved progress bar JS
+ + JS cleanup
+ + Fixed errors when GD not available
+ + Added Uploaded time and Downloads fields to download page
+ + Added Max Downloads limit
+ + Now works correct with JS disabled
+ + Shortened Dowload links
+ + Better Delete links
+ + Fixed download filename bug in FF
+ + Auto-Copy download links
+ + Fixed multiple downloads bug

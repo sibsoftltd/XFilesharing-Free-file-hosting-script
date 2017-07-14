@@ -1,0 +1,43 @@
+<b>Files Uploaded</b>
+<br>Click the fields below to copy links to your clipboard<br><br>
+
+<TMPL_LOOP links>
+<div class="result_slot">
+<table cellspacing=0 cellpadding=3>
+<tr><td align=right><b>File Name:</b></td><td><TMPL_VAR filename></td></tr>
+<TMPL_IF status_OK>
+<tr><td align=right><b>Size:</b></td><td><TMPL_VAR size></td></tr>
+<TMPL_IF descr><tr><td align=right><b>Description:</b></td><td><TMPL_VAR descr></td></tr></TMPL_IF>
+<tr><td nowrap align=right><b>Download Link:</b></td><td><a href="<TMPL_VAR site_url>/<TMPL_VAR id>/<TMPL_VAR filename>.html" target="_blank"><TMPL_VAR site_url>/<TMPL_VAR id>/<TMPL_VAR filename>.html</a></td></tr>
+<tr><td align=right><b>Link for forums:</b></td><td><input type="text" onFocus="copy(this);" value="[URL=<TMPL_VAR site_url>/<TMPL_VAR id>/<TMPL_VAR filename>.html]<TMPL_VAR filename> - <TMPL_VAR size>[/URL]"></td></tr>
+<tr><td align=right><b>Direct Link:</b></td><td><input type="text" onFocus="copy(this);" value="<TMPL_VAR site_url>/<TMPL_VAR id>/<TMPL_VAR filename>.html"></td></tr>
+<tr><td align=right><b>Delete Link:</b></td><td><input type="text" onFocus="copy(this);" value="<TMPL_VAR site_url>/del-<TMPL_VAR id>-<TMPL_VAR del_id>/<TMPL_VAR filename>" style="background:#fff3f3"></td></tr>
+<TMPL_ELSE>
+<tr><td colspan=2><b class="err">Error happened while upload:</b> <TMPL_VAR status></td></tr>
+</TMPL_IF>
+</table>
+</div>
+<br><br>
+</TMPL_LOOP>
+
+<script type="text/javascript" language="javascript">
+function copy(obj)
+{
+  obj.focus();
+  obj.select();
+  if (window.clipboardData) {
+    window.clipboardData.setData("Text",obj.value);
+  } else {
+    var flashcopier = 'flashcopier';
+    if(!document.getElementById(flashcopier))
+    {
+      var divholder = document.createElement('div');
+      divholder.id = flashcopier;
+      document.body.appendChild(divholder);
+    }
+    document.getElementById(flashcopier).innerHTML = '';
+    var divinfo = '<embed src="<TMPL_VAR site_url>/_clipboard.swf" FlashVars="clipboard='+escape(obj.value)+'" width="0" height="0" type="application/x-shockwave-flash"></embed>';
+    document.getElementById(flashcopier).innerHTML = divinfo;
+  }
+}
+</script>

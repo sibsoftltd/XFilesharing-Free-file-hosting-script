@@ -1,0 +1,30 @@
+<Script>
+function CheckForm(f)
+{
+    var err=new Array();
+    if(f.name.value=='')err.push("Your name required");
+    if( !f.email.value.match(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/) )err.push("Valid e-mail required");
+    if(f.subject.value=='')err.push("Subject required");
+    if(f.message.value.length<5)err.push("Message is too short");
+    if(err.length>0){alert(err.join('\n'));return false;}
+    return true;
+}
+</Script>
+<div style="text-align:left;">
+<h3>Contact Us</h3>
+To contact us simply fill the form below. Please take a minute reading both our <a href="faq.html">FAQ</a> (frequently asked questionss) and our <a href="tos.html">TOS</a> (terms of service) before sending any messages regarding our services.
+
+<Form method="post" action="<TMPL_VAR site_url>/" onSubmit="return CheckForm(this);">
+<input type="hidden" name="act" value="contact_send">
+<input type="hidden" name="sc" value="<TMPL_VAR sc>">
+<input type="hidden" name="rand" value="<TMPL_VAR rand>">
+<table>
+<tr><td>Your name:</td><td><input type="text" name="name" value="<TMPL_VAR name>"></td></tr>
+<tr><td>Your e-mail:</td><td><input type="text" name="email" value="<TMPL_VAR email>"></td></tr>
+<tr><td>Subject:</td><td><input type="text" name="subject" value="<TMPL_VAR subject>"></td></tr>
+<tr><td>Message:</td><td><textarea name="message" rows=5 style="width:300px"><TMPL_VAR message></textarea></td></tr>
+<TMPL_IF sc><tr><td>Code:</td><td><table cellspacing=0 cellpadding=1><tr><td><TMPL_IF iurl><img src="<TMPL_VAR iurl>"><TMPL_ELSE><TMPL_VAR itext></TMPL_IF></td><td><input type="text" name="code" class="captcha_code"></td></tr></table></td></tr></TMPL_IF>
+<tr><td colspan=2 style="color:#c22;"><TMPL_VAR msg><br><input type="submit" value="Send Message"></td></tr>
+</table>
+
+</div>

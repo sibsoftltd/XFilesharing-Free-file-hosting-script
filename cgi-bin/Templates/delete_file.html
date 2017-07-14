@@ -1,0 +1,16 @@
+<div style="text-align:left">
+<h3>Delete File</h3>
+
+<TMPL_IF error><font class="err"><TMPL_VAR error></font></TMPL_IF>
+
+<TMPL_IF status><font class="ok"><TMPL_VAR status></font></TMPL_IF>
+
+<TMPL_IF confirm>
+Do you want to delete <b><TMPL_VAR fname></b> file?<br><br>
+<Form method="GET" action="<TMPL_VAR site_url>">
+<input type="hidden" name="del" value="<TMPL_VAR id>-<TMPL_VAR del_id>">
+<input type="hidden" name="confirm" value="yes">
+<input type="submit" value=" Delete "> &nbsp; 
+<input type="button" value="Cancel" onClick="document.location='<TMPL_VAR site_url>'">
+</Form>
+</TMPL_IF>
