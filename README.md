@@ -1,6 +1,6 @@
 <h1>XFilesharing Free - Free version of file hosting script</h1>
 
-Run your own personal file upload website or a file hosting business and earn money online selling premium file hosting accounts.
+Run your own file sharing site and earn money online.
 
 <h2>About XFilesharing</h2>
 XFilesharing Free is a free version version of world known file hosting script XFilesharing Pro which is available at <a href="https://sibsoft.net/xfilesharing.html">XFilesharing Pro - file hosting script </a> website. 
